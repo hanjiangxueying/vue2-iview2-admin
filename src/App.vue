@@ -79,7 +79,7 @@
     background: url('assets/bg.jpg');
     repeat: no-repeat;
     background-attachment:fixed;
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='assets/bg.jpgg', sizingMethod='scale');
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='assets/bg.jpg', sizingMethod='scale');
     -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='assets/bg.jpg', sizingMethod='scale');
     background-size: cover;
     -moz-background-size: cover;
