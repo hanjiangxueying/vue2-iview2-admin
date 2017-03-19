@@ -55,6 +55,7 @@
         methods: {
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
+                    sessionStorage.setItem('user', JSON.stringify(this.formLogin.username));
                     if (valid) {
                         this.$Message.success('提交成功!');
                         console.log("校验成功......");
