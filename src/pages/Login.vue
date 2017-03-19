@@ -58,19 +58,14 @@
                     sessionStorage.setItem('user', JSON.stringify(this.formLogin.username));
                     if (valid) {
                         this.$Message.success('提交成功!');
-                        console.log("校验成功......");
                         this.$router.push({ path: '/table' });
                     } else {
                         this.$Message.error('表单验证失败!');
                     }
                      if(this.formLogin.remember[0] == "记住密码"){
-                        console.log("记住密码");       
-                        console.log(this.formLogin.username);
-                        console.log(this.formLogin.password);
                         sessionStorage.setItem('username', JSON.stringify(this.formLogin.username));
                         sessionStorage.setItem('password', JSON.stringify(this.formLogin.password));
                     }else{
-                        console.log("xiaochumima......");
                         sessionStorage.removeItem('username');
                         sessionStorage.removeItem('password');
                     }
@@ -81,8 +76,6 @@
             }
         },
         mounted() {
-            console.log(sessionStorage.getItem('username'));
-              console.log(sessionStorage.getItem('password'));
             if(sessionStorage.getItem('username')){
                 this.formLogin.username = JSON.parse(sessionStorage.getItem('username'));
             }

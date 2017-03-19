@@ -20,16 +20,12 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.path == '/login') {
-        console.log("/login");
         sessionStorage.removeItem('user');
     }
     let user = JSON.parse(sessionStorage.getItem('user'));
-    console.log(user);
     if (!user && to.path != '/login') {
-        console.log(1)
         next({ path: '/login' })
     } else {
-        console.log(2)
         next()
     }
 })
