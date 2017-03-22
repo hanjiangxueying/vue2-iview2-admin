@@ -8,6 +8,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 var env = config.build.env
 
@@ -85,7 +86,21 @@ var webpackConfig = merge(baseWebpackConfig, {
             from: path.resolve(__dirname, '../static'),
             to: config.build.assetsSubDirectory,
             ignore: ['.*']
-        }])
+        }]),
+        /*  new CopyWebpackPlugin([{
+              from: path.resolve(__dirname, '../img/'),
+              to: config.build.assetsSubDirectory + '/img/',
+              ignore: ['.*']
+          }]),
+          new CopyWebpackPlugin([{
+              from: path.resolve(__dirname, '../fonts/'),
+              to: config.build.assetsSubDirectory + '/fonts/',
+              ignore: ['.*']
+          }])*/
+
+        new TransferWebpackPlugin([
+            { from: '../../../img' }
+        ], path.resolve(__dirname, "../dist/static/img/"))
     ]
 })
 
