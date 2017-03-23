@@ -30,8 +30,8 @@ let routes = [{
         iconCls: 'ios-home', //图标样式class
         children: [
             { path: '/main', component: Main, name: '主页', hidden: true },
-            { path: '/table', component: Table, name: 'Table' },
-            { path: '/form', component: Form, name: 'Form' },
+            { path: '/table', component: Table, name: '表格' },
+            { path: '/form', component: Form, name: '表单' },
             { path: '/user', component: user, name: '列表' },
         ]
     },

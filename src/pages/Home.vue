@@ -62,7 +62,9 @@
     margin-right: 25px;
     margin-top: 22px;
 }
-
+.ivu-menu-submenu-title{
+    padding: 14px;
+}
 
  
 </style>
@@ -70,7 +72,7 @@
     <div class="layout" :class="{'layout-hide-text': spanLeft < 5}">
         <Row type="flex">
             <i-col :span="spanLeft" class="layout-menu-left">
-                <Menu theme="dark" width="auto" :activeName="this.$route.path" :openNames="['2']" accordion @on-select="menuSelect">
+                <Menu :mode="modeType" theme="dark" width="auto" :activeName="this.$route.path" :openNames="['2']" accordion @on-select="menuSelect">
                      <div class="layout-logo-left">
                          <Icon type="paper-airplane" :size="logoSize" v-show="logoIsDisplay"></Icon>
                          <span class="layout-text"> Admin 管理系统</span>
@@ -164,6 +166,7 @@
     export default {
         data () {
             return {
+                modeType: "vertical",
                 modal1: false,
                 spanLeft: 5,
                 spanRight: 19,
@@ -187,8 +190,8 @@
         methods: {
             toggleClick () {
                 if (this.spanLeft === 5) {
-                    this.spanLeft = 2;
-                    this.spanRight = 22;
+                    this.spanLeft = 1;
+                    this.spanRight = 23;
                 } else {
                     this.spanLeft = 5;
                     this.spanRight = 19;

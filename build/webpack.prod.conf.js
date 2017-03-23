@@ -87,20 +87,18 @@ var webpackConfig = merge(baseWebpackConfig, {
             to: config.build.assetsSubDirectory,
             ignore: ['.*']
         }]),
-        /*  new CopyWebpackPlugin([{
-              from: path.resolve(__dirname, '../img/'),
-              to: config.build.assetsSubDirectory + '/img/',
-              ignore: ['.*']
-          }]),
-          new CopyWebpackPlugin([{
-              from: path.resolve(__dirname, '../fonts/'),
-              to: config.build.assetsSubDirectory + '/fonts/',
-              ignore: ['.*']
-          }])*/
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, '../img/'),
+            to: config.build.assetsSubDirectory + '/img/',
+            ignore: ['.*']
+        }]),
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, '../fonts/'),
+            to: config.build.assetsSubDirectory + '/fonts/',
+            ignore: ['.*']
+        }])
 
-        new TransferWebpackPlugin([
-            { from: '../../../img' }
-        ], path.resolve(__dirname, "../dist/static/img/"))
+
     ]
 })
 
