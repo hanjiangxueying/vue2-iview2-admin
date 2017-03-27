@@ -72,7 +72,7 @@
     <div class="layout" :class="{'layout-hide-text': spanLeft < 5}">
         <Row type="flex">
             <i-col :span="spanLeft" class="layout-menu-left">
-                <Menu :mode="modeType" theme="dark" width="auto" :activeName="this.$route.path" :openNames="['2']" accordion @on-select="menuSelect">
+                <Menu :mode="modeType" theme="dark" width="auto" :active-name="this.$route.path" :open-names="['2']" @on-select="menuSelect">
                      <div class="layout-logo-left">
                          <Icon type="paper-airplane" :size="logoSize" v-show="logoIsDisplay"></Icon>
                          <span class="layout-text"> Admin 管理系统</span>
