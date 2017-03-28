@@ -38,7 +38,8 @@ import {
                     {
                         title: '地址',
                         align: 'center',
-                        key: 'addr'
+                        key: 'addr',
+                        width: 300
                     },
                     {
                         title: '年龄',

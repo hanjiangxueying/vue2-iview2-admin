@@ -58,12 +58,30 @@
     display: inline-block;
     float: right;
 }
+.userinfo .ivu-dropdown{
+    margin-top: 50px;
+}
  .ivu-dropdown {
     margin-right: 25px;
     margin-top: 22px;
 }
 .ivu-menu-submenu-title{
     padding: 14px;
+}
+
+.head-img {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    float: right;
+    margin-top: -50px;
+}
+.head-img img{
+    border-radius: 20px;
+    margin: 10px 0px 10px 10px;
+    width: 40px;
+    height: 40px;
+    float: right;
 }
 
  
@@ -110,10 +128,14 @@
                     </i-button>
                     <div class="userinfo">
                       <Dropdown placement="bottom-end">
-                        <a href="javascript:void(0)">
+                      <!--  <a href="javascript:void(0)">
                             Admin
                             <Icon type="arrow-down-b"></Icon>
-                        </a>
+                        </a>-->
+                        <span class="head-img">
+                            hjxy
+                            <img src="http://image3.fengniao.com/head/10192/180/10191283_5.jpg">
+                        </span>
                         <Dropdown-menu slot="list">
                             <Dropdown-item @click.native="modifyPassWord()">修改密码</Dropdown-item>
                             <Dropdown-item  @click.native="logout()" divided>退出</Dropdown-item>
