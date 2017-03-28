@@ -4,9 +4,11 @@
   登录界面</br>
 ![](https://github.com/hanjiangxueying/vue2-iview2-admin/raw/master/src/assets/logoin.png) 
   登录进去之后的表格</br>
-![](https://github.com/hanjiangxueying/vue2-iview2-admin/raw/master/src/assets/nav1.png)   
+![](https://github.com/hanjiangxueying/vue2-iview2-admin/raw/master/src/assets/table.png)   
   登录进去之后的echarts图表展示
 ![](https://github.com/hanjiangxueying/vue2-iview2-admin/raw/master/src/assets/echarts.png) 
+  form表单展示
+![](https://github.com/hanjiangxueying/vue2-iview2-admin/raw/master/src/assets/form.png)   
 ## 安装
   可以有多种方法进行安装。
 ### 使用命令行
