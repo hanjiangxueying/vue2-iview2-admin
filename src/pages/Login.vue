@@ -99,7 +99,7 @@
     background-color: #F9FAFC;
     margin: 180px auto;
     width: 400px;
-    border: 2px solid #8492A6;
+   /* border: 2px solid #8492A6;*/
   }
   
   .title {

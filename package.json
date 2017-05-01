@@ -39,7 +39,7 @@
         "function-bind": "^1.1.0",
         "html-webpack-plugin": "^2.28.0",
         "http-proxy-middleware": "^0.17.4",
-        "iview": "^2.0.0-rc.6",
+        "iview": "^2.0.0-rc.12",
         "json-loader": "^0.5.4",
         "mockjs": "^1.0.1-beta3",
         "opn": "^4.0.2",

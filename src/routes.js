@@ -58,7 +58,7 @@ let routes = [{
     {
         path: '/',
         component: Home,
-        name: 'Charts',
+        name: '导航四',
         iconCls: 'stats-bars',
         children: [
             { path: '/echarts', component: echarts, name: 'echarts' }

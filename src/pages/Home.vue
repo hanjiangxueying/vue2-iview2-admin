@@ -90,13 +90,13 @@
     <div class="layout" :class="{'layout-hide-text': spanLeft < 5}">
         <Row type="flex">
             <i-col :span="spanLeft" class="layout-menu-left">
-                <Menu :mode="modeType" theme="dark" width="auto" :active-name="this.$route.path" :open-names="['2']" @on-select="menuSelect">
+                <Menu :mode="modeType" theme="dark" width="auto" :active-name="this.$route.path" :open-names="openNames" @on-select="menuSelect" accordion>
                      <div class="layout-logo-left">
                          <Icon type="paper-airplane" :size="logoSize" v-show="logoIsDisplay"></Icon>
                          <span class="layout-text"> Admin 管理系统</span>
                      </div>
                    <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">  
-                        <Submenu :name="index" v-if="!item.leaf">
+                        <Submenu :name="item.name" v-if="!item.leaf">
                             <template slot="title">
                                 <Icon :type="item.iconCls" :size="iconSize"></Icon>
                                 <span class="layout-text" >{{item.name}}</span>
@@ -111,13 +111,6 @@
                                 <span class="layout-text" >{{item.children[0].name}}</span>
                             </Menu-item>
                         </template>  
-                        <!-- <Submenu :name="index" v-if="item.leaf&&item.children.length>0">
-                            <template slot="title">
-                                    <Icon type="ios-navigate" :size="iconSize"></Icon>
-                                    <span class="layout-text">{{item.children[0].name}}</span>
-                               <Menu-item :name="item.children[0].path">{{item.children[0].name}}</Menu-item>
-                            </template>
-                        </Submenu>-->
                    </template>
                 </Menu>
             </i-col>
@@ -128,28 +121,15 @@
                     </i-button>
                     <div class="userinfo">
                       <Dropdown placement="bottom-end">
-                      <!--  <a href="javascript:void(0)">
-                            Admin
-                            <Icon type="arrow-down-b"></Icon>
-                        </a>-->
                         <span class="head-img">
-                            hjxy
-                            <img src="http://image3.fengniao.com/head/10192/180/10191283_5.jpg">
+                            {{curUserName}}
+                            <img src="../assets/user.jpg">
                         </span>
                         <Dropdown-menu slot="list">
                             <Dropdown-item @click.native="modifyPassWord()">修改密码</Dropdown-item>
                             <Dropdown-item  @click.native="logout()" divided>退出</Dropdown-item>
                         </Dropdown-menu>
                     </Dropdown>
-                 <!--       <Menu mode="horizontal" theme="light">
-                         <Submenu name="4">
-                            <template slot="title">
-                                Admin
-                            </template>
-                                <Menu-item name="4-1" @click.native="modifyPassWord()">修改密码</Menu-item>
-                                <Menu-item name="4-2" @click.native="logout()">退出登录</Menu-item>
-                        </Submenu>
-                      </Menu>  -->
                     </div>
                 </div>
                 <div class="layout-breadcrumb">
@@ -163,21 +143,22 @@
                         <router-view></router-view>
                      </div>
                 </div>
-            <!--    <div class="layout-copy">
-                    2011-2016 &copy; TalkingData
-                </div>
-                -->
             </i-col>
         </Row>
 
-          <Modal
-         :value="modal1"
-        title="普通的Modal对话框标题"
-        @on-ok="comfirmModifyPS">
-        <p>对话框内容</p>
-        <p>对话框内容</p>
-        <p>对话框内容</p>
-    </Modal>
+          <Modal v-model="modal1" title="修改密码" @on-ok.prevent="comfirmModifyPS"  @on-cancel="cancel" >
+            <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
+                <Form-item label="原密码" prop="oldPassword">
+                    <Input v-model="formValidate.oldPassword" placeholder="请输入原始密码"></Input>
+                </Form-item>
+                <Form-item label="新密码" prop="newPassword">
+                    <Input v-model="formValidate.newPassword" placeholder="请输入新密码"></Input>
+                </Form-item>
+                 <Form-item label="确认新密码" prop="resetPassword">
+                    <Input v-model="formValidate.resetPassword" placeholder="请再次输入新密码"></Input>
+                </Form-item>
+            </Form>
+        </Modal>
     </div>
     <!-- 修改密码 模态框 -->
   
@@ -188,11 +169,30 @@
     export default {
         data () {
             return {
+                openNames: [this.$route.matched[0].name],
+                curUserName : sessionStorage.getItem('user').replace(/\"/g, ""),
                 modeType: "vertical",
-                modal1: false,
                 spanLeft: 5,
                 spanRight: 19,
-                logoIsDisplay: false
+                logoIsDisplay: false,
+                loading: true,
+                modal1: false,
+                formValidate: {
+                    oldPassword: '',
+                    newPassword: '',
+                    resetPassword:''
+                },
+                ruleValidate: {
+                    oldPassword: [
+                        { required: true, message: '密码不能为空', trigger: 'blur' }
+                    ],
+                    newPassword: [
+                        { required: true, message: '密码不能为空', trigger: 'blur' }
+                    ],
+                    resetPassword: [
+                        { required: true, message: '密码不能为空', trigger: 'blur' }
+                    ],
+                }
             }
         },
         computed: {
@@ -226,7 +226,22 @@
                 this.$router.push('/login');
             },
             comfirmModifyPS() {
-                this.$Message.info('点击了确定');
+                return false;
+                this.$refs.formValidate.validate((valid) => {
+                    if (valid) {
+                         this.modal1 = false;
+                //         this.loading = false;
+                        this.$Message.success('提交成功!');
+                    } else {
+                        this.$Message.error('表单验证失败!');
+                        return false;
+                    }
+                })    
+               // this.$Message.info('点击了确定');
+            },
+            cancel(){
+                this.modal1 = false;    
+                this.$Message.info('点击了取消');
             },
             menuSelect(name) {
                  this.$router.push({ path: name });
