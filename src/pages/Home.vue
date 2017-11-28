@@ -95,7 +95,7 @@
                          <Icon type="paper-airplane" :size="logoSize" v-show="logoIsDisplay"></Icon>
                          <span class="layout-text"> Admin 管理系统</span>
                      </div>
-                   <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">  
+                   <template v-for="(item,index) in $router.options.routes" v-if="spanLeft >= 5 && !item.hidden">  
                         <Submenu :name="item.name" v-if="!item.leaf">
                             <template slot="title">
                                 <Icon :type="item.iconCls" :size="iconSize"></Icon>
@@ -111,6 +111,25 @@
                                 <span class="layout-text" >{{item.children[0].name}}</span>
                             </Menu-item>
                         </template>  
+                   </template>
+                   <template v-for="(item,index) in $router.options.routes" v-if="spanLeft < 5 && !item.hidden">
+                        <Dropdown placement="right-start" class="_dropdownList" transfer="true" @on-click="dropDown">
+                            <a href="javascript:void(0)">
+                                <Icon :type="item.iconCls" class="_iconCls ivu-col-span-1" :size="iconSize"></Icon>
+                            </a>
+                            <DropdownMenu slot="list">
+                                 <DropdownItem  v-if="!item.name" :name="item.children[0].path">{{item.children[0].name}}</DropdownItem>
+                                  <Dropdown placement="right-start" transfer="true" v-if="item.children && item.name">
+                                      <DropdownItem>
+                                        {{item.name}}
+                                        <Icon type="ios-arrow-right"></Icon>
+                                    </DropdownItem>
+                                    <DropdownMenu slot="list">
+                                        <DropdownItem v-for="(child,childIndex) in item.children" :key="childIndex" :name="child.path">{{child.name}}</DropdownItem>
+                                    </DropdownMenu>
+                                  </Dropdown>    
+                            </DropdownMenu>    
+                        </Dropdown>
                    </template>
                 </Menu>
             </i-col>
@@ -202,7 +221,7 @@
             logoSize(){
                 if(this.spanLeft !== 5){
                     this.logoIsDisplay = true;
-                    return 30;
+                    return 50;
                 }else{
                     this.logoIsDisplay = false;
                     return 0;
@@ -245,6 +264,10 @@
             },
             menuSelect(name) {
                  this.$router.push({ path: name });
+            },
+            dropDown(name) {
+                this.$router.push({ path: name });
+                console.log(name);
             }
           
         },
@@ -252,3 +275,16 @@
         }
     }
 </script>
+<style scoped>
+.ivu-select-dropdown .ivu-dropdown {
+     margin: 0px 12px 0px 0px; 
+}
+._dropdownList{
+   /*  width: 100%;
+    text-align: center; */
+}
+._iconCls{
+    width: 56px;
+    text-align: center;
+}
+</style>
