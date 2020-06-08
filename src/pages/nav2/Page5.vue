@@ -34,7 +34,15 @@
 							'见证了整个春天。'
 			  }
             }
-        }
+		},
+		methods: {
+			onCopy() {
+
+			},
+			onError() {
+
+			}
+		}
 	}
 </script>
 <style scoped>
